@@ -3,11 +3,19 @@ import sqlite3
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
 
+import logging
+
+# Function to get a database connection.
+# This function connects to database with the name `database.db`
+db_count = 0
+
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
 def get_db_connection():
     connection = sqlite3.connect('database.db')
     connection.row_factory = sqlite3.Row
+    global db_count
+    db_count += 1
     return connection
 
 # Function to get a post using its ID
@@ -65,6 +73,38 @@ def create():
 
     return render_template('create.html')
 
+@app.route('/healthz')
+def healthcheck():
+    response = app.response_class(
+            response=json.dumps({"result":"OK - healthy"}),
+            status=200,
+            mimetype='application/json'
+    )
+    return response
+
+@app.route('/metrics')
+def metrics():
+    connection = get_db_connection()
+    post_count = connection.execute('SELECT count(*) FROM posts;').fetchone()[0];
+    connection.close()
+
+    response = app.response_class(
+            response=json.dumps({"db_connection_count": db_count,"post_count": post_count}),
+            status=200,
+            mimetype='application/json'
+    )
+
+    return response
+
 # start the application on port 3111
 if __name__ == "__main__":
+   logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(levelname)s:%(name)s:%(asctime)s %(message)s',
+    datefmt='%d/%m/%Y, %H:%M:%S,',
+    handlers=[
+        logging.FileHandler("app.log"),
+        logging.StreamHandler()
+    ])
+   
    app.run(host='0.0.0.0', port='3111')

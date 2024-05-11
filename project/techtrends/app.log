@@ -1,0 +1,13 @@
+WARNING:werkzeug:11/05/2024, 15:54:00,  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO:werkzeug:11/05/2024, 15:54:00,  * Running on http://192.168.1.2:3111/ (Press CTRL+C to quit)
+INFO:werkzeug:11/05/2024, 15:54:25, 192.168.1.2 - - [11/May/2024 15:54:25] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:11/05/2024, 15:54:25, 192.168.1.2 - - [11/May/2024 15:54:25] "GET /static/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:11/05/2024, 15:54:26, 192.168.1.2 - - [11/May/2024 15:54:26] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:11/05/2024, 16:01:36, 192.168.1.2 - - [11/May/2024 16:01:36] "GET /1 HTTP/1.1" 200 -
+INFO:werkzeug:11/05/2024, 16:01:36, 192.168.1.2 - - [11/May/2024 16:01:36] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:11/05/2024, 16:01:51, 192.168.1.2 - - [11/May/2024 16:01:51] "[33mGET /statis HTTP/1.1[0m" 404 -
+INFO:werkzeug:11/05/2024, 16:01:57, 192.168.1.2 - - [11/May/2024 16:01:57] "[33mGET /statisz HTTP/1.1[0m" 404 -
+INFO:werkzeug:11/05/2024, 16:02:08, 192.168.1.2 - - [11/May/2024 16:02:08] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:11/05/2024, 16:02:15, 192.168.1.2 - - [11/May/2024 16:02:15] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:11/05/2024, 16:02:19, 192.168.1.2 - - [11/May/2024 16:02:19] "GET /metrics HTTP/1.1" 200 -
