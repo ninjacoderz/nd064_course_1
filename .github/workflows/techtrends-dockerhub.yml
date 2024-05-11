@@ -36,4 +36,4 @@ jobs:
           context: ./project/techtrends
           file: ./project/Dockerfile
           push: true
-          tags: jasonwee/techtrends:latest
+          tags: binhcools/techtrends:latest
