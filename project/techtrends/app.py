@@ -74,12 +74,26 @@ def create():
     return render_template('create.html')
 
 @app.route('/healthz')
-def healthcheck():
-    response = app.response_class(
+def healthz():  
+    connection = get_db_connection()
+    posts_table_exists = connection.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='posts'"
+    ).fetchone()
+    connection.close()
+
+    if posts_table_exists is None:
+        response = app.response_class(
+            response=json.dumps({"result": "ERROR - unhealthy"}),
+            status=500,
+            mimetype='application/json'
+        )
+    else: 
+        response = app.response_class(
             response=json.dumps({"result":"OK - healthy"}),
             status=200,
             mimetype='application/json'
-    )
+        )
+
     return response
 
 @app.route('/metrics')
